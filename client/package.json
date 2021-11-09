@@ -1,36 +1,44 @@
 {
-  "name": "appointments",
+  "name": "react-pokeapi",
   "version": "1.0.0",
-  "description": "Appointments system",
+  "description": "React pokeapi example",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest --watchAll",
     "dev": "npx webpack-dev-server --mode development",
-    "build": "webpack"
+    "build": "npx webpack --mode development"
   },
   "repository": {
     "type": "git",
-    "url": "example.com"
+    "url": "git+https://github.com/amilcaralex97/react-pokeapi.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Amilcar Sanchez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amilcaralex97/react-pokeapi/issues"
+  },
+  "homepage": "https://github.com/amilcaralex97/react-pokeapi#readme",
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
-    "babel-loader": "^8.2.2",
-    "faker": "^5.5.3",
-    "jest": "^27.2.4",
+    "@babel/register": "^7.15.3",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-styled-components": "^1.13.3",
+    "css-loader": "^6.5.0",
     "react-hot-loader": "^4.13.0",
-    "webpack": "^5.52.1",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "style-loader": "^3.3.1",
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1"
   },
   "jest": {
     "testEnvironment": "jsdom",
