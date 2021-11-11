@@ -17,7 +17,11 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log(socket.id);
+    console.log(`User connected ${socket.id}`);
+
+    io.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 });
 
 const PORT = process.env.PORT || 5001;
