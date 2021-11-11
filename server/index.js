@@ -1,27 +1,27 @@
 const express = require('express');
-
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const http = require('http');
+
+const cors = require('cors');
+const { Server } = require('socket.io');
+
+app.use(cors());
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST'],
+    },
+});
+
+io.on('connection', (socket) => {
+    console.log(socket.id);
+});
 
 const PORT = process.env.PORT || 5001;
 
-app.use(express.static(''));
-
-app.get('/', function (req, res) {
-    res.sendfile('index.html');
-});
-
-//Whenever someone connects this gets executed
-io.on('connection', function (socket) {
-    console.log('A user connected');
-
-    //Whenever someone disconnects this piece of code executed
-    socket.on('disconnect', function () {
-        console.log('A user disconnected');
-    });
-});
-
-http.listen(PORT, function () {
-    console.log(`Listening on port ${PORT}`);
+server.listen(PORT, () => {
+    console.log(`Server running on PORT ${PORT}`);
 });
