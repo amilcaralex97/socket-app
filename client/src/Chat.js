@@ -5,10 +5,13 @@ import ScrollToBottom from "react-scroll-to-bottom";
 export default function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  let [counter, setCounter] = useState(1);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
+        type: 1,
+        sequence: counter,
         room: room,
         author: username,
         message: currentMessage,
@@ -17,7 +20,7 @@ export default function Chat({ socket, username, room }) {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-
+      setCounter(counter + 1);
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
     }
@@ -25,6 +28,7 @@ export default function Chat({ socket, username, room }) {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      data.type = 0;
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
@@ -49,6 +53,8 @@ export default function Chat({ socket, username, room }) {
                   <div className="message-meta">
                     <p id="time">{messageContent.time}</p>
                     <p id="author">{messageContent.author}</p>
+                    <p id="author">Type: {messageContent.type}</p>
+                    <p id="author">Sequence: {messageContent.sequence}</p>
                   </div>
                 </div>
               </div>
