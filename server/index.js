@@ -11,14 +11,14 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: '*',
         methods: ['GET', 'POST'],
     },
 });
 
 io.on('connection', (socket) => {
     console.log(`User connected ${socket.id}`);
-
+    socket.emit('welcome', `Welcome to the socket ${socket.id}`);
     socket.on('join_room', (data) => {
         socket.join(data);
         console.log(`user with ID ${socket.id} joined room: ${data}`);
